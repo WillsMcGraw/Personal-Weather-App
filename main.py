@@ -1,26 +1,25 @@
 import requests
 import json
 
-api_key = "3903213a8131c3c0656d68c55112b07b"
+# Creates an empty dictionary for config variables to be stored in
+env_config = {}
 
-city = "Blacksburg"
-state_code = "VA"
-country_code = "US"
+# Opens the JSON files holding the config information and stores them
+# in the env_config dictionary
+with open('config.json', 'r') as config_json:
+    config = json.load(config_json)
+    env_config['key'] = config['key']
+    env_config['city'] = config['city']
+    env_config['state_code'] = config['state_code']
+    env_config['country_code'] = config['country_code']
 
-city_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city},{state_code},{country_code}&appid={api_key}"
-coordinates = requests.get(city_url).json()[0]
-longitude = coordinates["lon"]
-latitude = coordinates["lat"]
-print(longitude)
-print(latitude)
+# Renames the env_config variables into global variables for ease of use
+KEY = env_config['key']
+CITY = env_config['city']
+STATE = env_config['state_code']
+COUNTRY = env_config['country_code']
 
-
-# url = ""
-# response = requests.get(url)
-
-# if response.status_code == 200:
-#     data = response.json()
-#     data = json.dumps(data)
-#     print(data)
-# else:
-#     print("Error in fetching data")
+# Pulls weather data using config variables
+weather_url = f"https://api.openweathermap.org/data/2.5/forecast?q={CITY},{STATE},{COUNTRY}&appid={KEY}"
+weather_data = requests.get(weather_url).json()
+print(weather_data)
