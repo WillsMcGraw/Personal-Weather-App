@@ -1,5 +1,6 @@
 import requests
 import json
+import datetime
 
 def main():
     # Creates an empty dictionary for config variables to be stored in
@@ -27,26 +28,36 @@ def main():
     # Slices weather data to only the first 5 entries needed
     weather_data_full = weather_data_full["list"][:5]
 
-    # Creates a dictionary to hold temperature data
-    weather_data = {'act_temp' : [], 'feel_temp' : []}
+    # Creates a dictionary to hold temperature and time data
+    weather_data = {'act_temp' : [], 'feel_temp' : [], 'time' : []}
 
     # Checks through the saved weather data to pull temperature data
     # Temperature data is converted from Kelvin to Fahrenheit and then
     # entered into the previously made dictionary for temperature data
-    for i in range(5):
+    # It also pulls time data and stores it in the dictionary
+    for i in range(len(weather_data_full)):
         a_temp = round(convert_K_to_F(weather_data_full[i]['main']['temp']), 1)
         f_temp = round(convert_K_to_F(weather_data_full[i]['main']['feels_like']), 1)
+        time = convert_time(weather_data_full[i]['dt'])
         weather_data['act_temp'].append(a_temp)
         weather_data['feel_temp'].append(f_temp)
+        weather_data['time'].append(time)
 
     return weather_data
 
 # A simple function to convert Kelvin temperatures to
 # fahrenheit temperatures
+# It returns an integer that represents the temperature in Fahrenheit
 def convert_K_to_F(K_temp):
     C_temp = K_temp - 273.15
     F_temp = C_temp * 1.8 + 32
     return F_temp
 
+# A function to take a time in UNIX and convert it to a datetime type.
+def convert_time(unix_time):
+    converted_time = datetime.datetime.fromtimestamp(unix_time)
+    return converted_time
+
+# Runs the main function
 if __name__ == "__main__":
     main()
