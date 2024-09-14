@@ -12,9 +12,9 @@ env_config = {}
 
 # Opens the JSON files holding the config information and stores them
 # in the env_config dictionary
-with open('email_config.json', 'r') as config_json:
+with open('config.json', 'r') as config_json:
     config = json.load(config_json)
-    env_config['key'] = config['key']
+    env_config['key'] = config['email_key']
     env_config['sender'] = config['sender']
     env_config['receiver'] = config['receiver']
 

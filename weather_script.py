@@ -7,9 +7,9 @@ def main():
 
     # Opens the JSON files holding the config information and stores them
     # in the env_config dictionary
-    with open('weather_config.json', 'r') as config_json:
+    with open('config.json', 'r') as config_json:
         config = json.load(config_json)
-        env_config['key'] = config['key']
+        env_config['key'] = config['weather_key']
         env_config['city'] = config['city']
         env_config['state_code'] = config['state_code']
         env_config['country_code'] = config['country_code']
