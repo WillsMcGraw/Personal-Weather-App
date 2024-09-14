@@ -1,0 +1,15 @@
+Temperature: 64.9
+Feels like: 65.2
+
+Temperature: 62.1
+Feels like: 62.4
+
+Temperature: 59.9
+Feels like: 60.1
+
+Temperature: 63.3
+Feels like: 63.5
+
+Temperature: 71.7
+Feels like: 71.8
+

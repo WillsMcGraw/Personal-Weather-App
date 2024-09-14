@@ -7,7 +7,7 @@ def main():
 
     # Opens the JSON files holding the config information and stores them
     # in the env_config dictionary
-    with open('config.json', 'r') as config_json:
+    with open('weather_config.json', 'r') as config_json:
         config = json.load(config_json)
         env_config['key'] = config['key']
         env_config['city'] = config['city']
@@ -39,8 +39,7 @@ def main():
         weather_data['act_temp'].append(a_temp)
         weather_data['feel_temp'].append(f_temp)
 
-    print(weather_data['act_temp'])
-    print(weather_data['feel_temp'])
+    return weather_data
 
 # A simple function to convert Kelvin temperatures to
 # fahrenheit temperatures
